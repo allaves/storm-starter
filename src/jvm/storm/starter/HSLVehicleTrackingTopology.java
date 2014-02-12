@@ -24,12 +24,11 @@ public class HSLVehicleTrackingTopology {
 			e1.printStackTrace();
 		}
 		
-		
 		TopologyBuilder builder = new TopologyBuilder();
 		builder.setSpout("hslService", new HSLObservationsSpout(), 1);
 		builder.setBolt("separateLines", new SeparateLinesBolt(), 1).shuffleGrouping("hslService");
 		builder.setBolt("separateFields", new SeparateFieldsBolt(), 8).shuffleGrouping("separateLines");
-		builder.setBolt("displayObservations", new DisplayHSLVehiclesBolt(), 8).fieldsGrouping("separateFields", new Fields("vehicleId"));
+		builder.setBolt("displayObservations", new DisplayHSLVehiclesBolt(), 16).fieldsGrouping("separateFields", new Fields("vehicleId"));
 		
 		Config conf = new Config();
 		conf.setDebug(true);
