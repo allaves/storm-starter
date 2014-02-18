@@ -41,10 +41,13 @@ public class MessageHandler {
 		 return connection.createChannel();
 	 }
 	 
-	 public static void push(Channel channel, String msg) throws IOException {
+	 public static void push(Channel channel, String msg, String routingKey) throws IOException {
 		 if (channel != null) {
-			 channel.basicPublish(EXCHANGE, "", null, msg.getBytes());
-			 log.info(" [x] Sent '" + msg + "'");
+			 if (routingKey == null) {
+				 routingKey = "";
+			 }
+			 channel.basicPublish(EXCHANGE, routingKey, null, msg.getBytes());
+			 log.info(" [" + routingKey + "] Sent '" + msg + "'");
 			 channel.close();
 		 }
 		 else {
