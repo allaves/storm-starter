@@ -31,7 +31,7 @@ public class DisplayHSLVehiclesBolt implements IRichBolt {
 		//System.out.println("Lat/lon: " + input.getStringByField("lat") + " " + input.getStringByField("lon"));
 		//Send a message with the coordinates to a queue (one queue per vehicle or per vehicle type?)
 		try {
-			MessageHandler.push(MessageHandler.createChannel(), input.getStringByField("vehicleId") + " " + input.getStringByField("lat") + " " + input.getStringByField("lon"), input.getStringByField("vehicleId"));
+			MessageHandler.push(MessageHandler.createChannel(), input.getStringByField("vehicleId") + " " + input.getStringByField("lat") + " " + input.getStringByField("lon"), "");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

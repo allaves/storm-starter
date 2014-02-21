@@ -28,7 +28,8 @@ public class HSLObservationsSpout implements IRichSpout {
 	public void open(Map conf, TopologyContext context,	SpoutOutputCollector collector) {
 		this.collector = collector;
 		try {
-			this.hslUrl = new URL("http://83.145.232.209:10001/?type=vehicles&lng1=23&lat1=60&lng2=26&lat2=61");
+			//this.hslUrl = new URL("http://83.145.232.209:10001/?type=vehicles&lng1=23&lat1=60&lng2=26&lat2=61");
+			this.hslUrl = new URL("http://83.145.232.209:10001/?type=vehicle&id=RHKL00074");
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -50,7 +51,7 @@ public class HSLObservationsSpout implements IRichSpout {
 
 	@Override
 	public void nextTuple() {
-		Utils.sleep(500);
+		Utils.sleep(1000);
 		try {
 			this.connection = hslUrl.openConnection();
 			this.connection.connect();
